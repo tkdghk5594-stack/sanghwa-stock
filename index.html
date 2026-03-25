@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <style>
+  body { display: none; }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상화 시그널 랩</title>
@@ -113,22 +116,25 @@
     </style>
 </head>
 <body>
- 
+
 <script>
-(function() {
+(function () {
     const now = new Date();
     const koreaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
 
-    let year = koreaTime.getFullYear().toString().slice(2);
-    let month = String(koreaTime.getMonth() + 1).padStart(2, '0');
-    let day = String(koreaTime.getDate()).padStart(2, '0');
+    const year = koreaTime.getFullYear().toString().slice(2);
+    const month = String(koreaTime.getMonth() + 1).padStart(2, "0");
+    const day = String(koreaTime.getDate()).padStart(2, "0");
 
     const todayPassword = "sh" + year + month + day;
+    const userInput = prompt("비밀번호를 입력하세요");
 
-    let userInput = prompt("비밀번호를 입력하세요");
-
-    if (userInput !== todayPassword) {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>접근 불가</h2>";
+    if (userInput === todayPassword) {
+        document.body.style.display = "block";
+    } else {
+        document.body.innerHTML = "<h2 style='text-align:center;margin-top:60px;'>접근 불가</h2>";
+        document.body.style.display = "block";
+        throw new Error("wrong password");
     }
 })();
 </script>
