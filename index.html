@@ -117,31 +117,8 @@
     </style>
 </head>
 <body>
+<div id="protected-content" style="display:none;">
 
-<script>
-(function () {
-    const now = new Date();
-    const koreaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
-
-    const year = koreaTime.getFullYear().toString().slice(2);
-    const month = String(koreaTime.getMonth() + 1).padStart(2, "0");
-    const day = String(koreaTime.getDate()).padStart(2, "0");
-
-    const todayPassword = "sh" + year + month + day;
-    const userInput = prompt("비밀번호를 입력하세요");
-
-    if (userInput === todayPassword) {
-        const protectedContent = document.getElementById("protected-content");
-        if (protectedContent) {
-            protectedContent.style.display = "block";
-        }
-    } else {
-        document.body.innerHTML = "<div style='text-align:center;margin-top:60px;font-size:40px;font-weight:bold;'>접근 불가</div>";
-    }
-})();
-</script>
-
-<div id="protected-content">
 
 <!-- 여기부터 기존 내용 -->
     <div class="header">
@@ -590,11 +567,31 @@
         </div>
         
     <div class="footer">
-        만든이: 이상화<br>
-        문의: 01062402011
-    </div>
-    
+    만든이: 이상화<br>
+    문의: 01062402011
 </div>
-    
+
+</div>  <!-- protected-content 닫기 -->
+
+<script>
+(function () {
+    const now = new Date();
+    const koreaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+
+    const year = koreaTime.getFullYear().toString().slice(2);
+    const month = String(koreaTime.getMonth() + 1).padStart(2, "0");
+    const day = String(koreaTime.getDate()).padStart(2, "0");
+
+    const todayPassword = "sh" + year + month + day;
+    const userInput = prompt("비밀번호를 입력하세요");
+
+    if (userInput === todayPassword) {
+        document.getElementById("protected-content").style.display = "block";
+    } else {
+        document.body.innerHTML = "<div style='text-align:center;margin-top:60px;font-size:40px;font-weight:bold;'>접근 불가</div>";
+    }
+})();
+</script>
+
 </body>
 </html>
