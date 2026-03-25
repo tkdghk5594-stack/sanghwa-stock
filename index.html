@@ -113,6 +113,27 @@
     </style>
 </head>
 <body>
+ 
+<script>
+(function() {
+    const now = new Date();
+    const koreaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+
+    let year = koreaTime.getFullYear().toString().slice(2);
+    let month = String(koreaTime.getMonth() + 1).padStart(2, '0');
+    let day = String(koreaTime.getDate()).padStart(2, '0');
+
+    const todayPassword = "sh" + year + month + day;
+
+    let userInput = prompt("비밀번호를 입력하세요");
+
+    if (userInput !== todayPassword) {
+        document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>접근 불가</h2>";
+    }
+})();
+</script>
+
+<!-- 여기부터 기존 내용 -->
     <div class="header">
         <h1>상화 시그널 랩</h1>
         <p>시가총액 3천억 이상 + 거래대금 상위 80종목 중 최종 선별</p>
