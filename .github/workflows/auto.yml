@@ -1,0 +1,35 @@
+name: Auto Stock Update
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # 매일 아침 7시 (한국시간)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: 파이썬 설치
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: 라이브러리 설치
+        run: |
+          pip install pykrx pandas matplotlib
+
+      - name: 분석 실행
+        run: |
+          python main.py
+
+      - name: 결과 커밋
+        run: |
+          git config --global user.name "sanghwa-bot"
+          git config --global user.email "bot@sanghwa.com"
+          git add .
+          git commit -m "auto update"
+          git push
