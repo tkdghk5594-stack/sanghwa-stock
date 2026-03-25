@@ -3,7 +3,8 @@
 <html lang="ko">
 <head>
     <style>
-  body { display: none; }
+      #protected-content { display: none; }
+      body { margin: 0; }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,14 +131,17 @@
     const userInput = prompt("비밀번호를 입력하세요");
 
     if (userInput === todayPassword) {
-        document.body.style.display = "block";
+        const protectedContent = document.getElementById("protected-content");
+        if (protectedContent) {
+            protectedContent.style.display = "block";
+        }
     } else {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:60px;'>접근 불가</h2>";
-        document.body.style.display = "block";
-        throw new Error("wrong password");
+        document.body.innerHTML = "<div style='text-align:center;margin-top:60px;font-size:40px;font-weight:bold;'>접근 불가</div>";
     }
 })();
 </script>
+
+<div id="protected-content">
 
 <!-- 여기부터 기존 내용 -->
     <div class="header">
@@ -589,5 +593,8 @@
         만든이: 이상화<br>
         문의: 01062402011
     </div>
+    
+</div>
+    
 </body>
 </html>
